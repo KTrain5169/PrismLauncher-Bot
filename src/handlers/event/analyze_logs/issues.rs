@@ -399,3 +399,14 @@ fn old_forge_new_java(log: &str) -> Issue {
 	);
 	found.then_some(issue)
 }
+
+fn fabric_mod_load_failure(log: &str) -> Issue {
+	let issue = (
+		"A mod failed to load, causing your game to crash."
+		"This crash is usually, but not always, due to using the wrong mod for the wrong modloader or version."
+			.to_string(),
+	);
+
+	let found = log.contains("java.lang.RuntimeException: Could not execute entrypoint stage 'client' due to errors, provided by ")
+	found.then_some(issue)
+}
